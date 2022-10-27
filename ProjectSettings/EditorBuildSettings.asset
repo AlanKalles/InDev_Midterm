@@ -19,7 +19,7 @@ EditorBuildSettings:
     guid: 41621ebea3c6c4042b979386c0ff420d
   - enabled: 1
     path: Assets/Scenes/Night2.unity
-    guid: f560f4d19a9e7f240a1ab5d6e7d40f68
+    guid: 621ee9b319597e44d90fbd7f12124022
   - enabled: 1
     path: Assets/Scenes/Room3.unity
     guid: b775e021b2994b146977447217422753

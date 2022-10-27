@@ -276,20 +276,23 @@ MonoBehaviour:
   dialogue:
     name: Ichika
     sentences:
-    - I go downstaris and see Akira. He is feeding a cat.
-    - He seems to like the cat really much
-    - The cat seems really familiar, and there comes a voice says:"Here you are."
+    - I go downstaris and see Akira. He is feeding a cat. It's Iwata.
+    - Apparently he has made friends with him. Seems like the secret is revealed
+      -- he is out there for Iwata.
+    - 'Suddenly, a voice comes behind me. '
     - It  is the old man Miyamoto, or should I say Ninja Shigeru?
-    - '"Well, both are my names. Don''t care about this, let me introduce you to
-      Iwata!" He seems to see through my heart. Clearly, Akira does not prepare for
-      my coming and is shocked.'
-    - Obviously, Akira has made friends with Miyamoto and Iwata for long time. He
-      dare not to tell me because I am afraid of cat.
-    - This time, I step forward and hug the cat. I feel soft and warm. It is so good
-      to hug such a cute creature.
-    - Akira tells me that he is glad that I overcome my difficulty. I hugged him
-      as well.
-    - 'It''s a happy ending at the end, I think. '
+    - '"Well, both are my names. Welcome, Ichika, again! To see my friend Iwata,
+      and with Iwata''s friend Akira! He yells loudly, which attracts Akira''s attention
+      and he sees me. He is too shocked to close his mouth.'
+    - '"Don''t worry Akira, Ichika has already known what''s happening and I bet
+      she can understand you. Right?" Miyamoto turns to me.'
+    - '"Yeah, Miyamoto helped me overcome my fear, and actually now I think that
+      cat is cute! They are soft and warm." I smiled to Akira. And he smiled back.'
+    - We hugged each other, for really long time. And ignoring Miyamoto's continuously
+      invitation to become a ninja.
+    - It's an excited adventure for short night, and a good ending for a story. Who
+      knows what's gonna happen in the future? But definitely, me and Akira are going
+      to pet a kitty.
 --- !u!4 &982665437
 Transform:
   m_ObjectHideFlags: 0

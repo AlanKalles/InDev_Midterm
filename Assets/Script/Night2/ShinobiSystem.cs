@@ -7,11 +7,7 @@ public class ShinobiSystem : MonoBehaviour
     public DialogueTrigger[] trigs;
     DialogueTrigger trig;
     bool enter = false;
-    bool item = false;
-    bool afterItem = false;
-    bool talkOnce = false;
-    public GameObject tube;
-    public GameObject elevator;
+    int talk = 0;
     public DoorKey key;
     // Start is called before the first frame update
     void Start()
@@ -26,30 +22,24 @@ public class ShinobiSystem : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                if (item == false && talkOnce == true)
-                {
-                    trig = trigs[2];
-                    trig.TriggerDialogue();
-                }
-                else if (item == true && afterItem == false)
+                if (talk == 1)
                 {
                     trig = trigs[1];
                     trig.TriggerDialogue();
-                    afterItem = true;
+                    talk = 2;
+                    StartCoroutine(Disappear());
                     key.getkey();
                 }
                 else
                 {
                     trig = trigs[0];
                     trig.TriggerDialogue();
-                    talkOnce = true;
-                    tube.SetActive(false);
-                    elevator.SetActive(true);
+                    talk = 1;
 
                 }
             }
         }
-        if (afterItem == true)
+        if (talk == 1)
         {
             StartCoroutine(Disappear());
         }
@@ -57,8 +47,15 @@ public class ShinobiSystem : MonoBehaviour
 
     IEnumerator Disappear()
     {
-        yield return new WaitForSeconds(6f);
-        this.transform.position = new Vector3(155, 26, 0);
+        yield return new WaitForSeconds(3f);
+        if (talk == 1)
+        {
+            this.transform.position = new Vector3(169, 51.503f, 0);
+        }
+        else
+        {
+            this.transform.position = new Vector3(159.81f, 12.84f, 0);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -71,8 +68,4 @@ public class ShinobiSystem : MonoBehaviour
         enter = false;
     }
 
-    public void catphotoCheck()
-    {
-        item = true;
-    }
 }

@@ -38,8 +38,9 @@ public class BellSystem : MonoBehaviour
             if (talked == false)
             {
                 trig[0].TriggerDialogue();
+
                 oe.catCheck();
-                this.transform.position = new Vector3(57.71f, -5.478f, 0);
+                StartCoroutine(timer());
                 talked = true;
             }
             else
@@ -48,6 +49,13 @@ public class BellSystem : MonoBehaviour
             }
         }
 
+
+    }
+
+    IEnumerator timer()
+    {
+        yield return new WaitForSeconds(3f);
+        this.transform.position = new Vector3(57.71f, -5.478f, 0);
 
     }
 

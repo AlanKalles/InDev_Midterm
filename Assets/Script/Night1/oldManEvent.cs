@@ -46,18 +46,20 @@ public class oldManEvent : MonoBehaviour
                 {
                     trig = trigs[2];
                     trig.TriggerDialogue();
-                }
-                else if (cat == true)
-                {
-                    trig = trigs[4];
-                    trig.TriggerDialogue();
-                    goback = true;
-                }
+                }                
                 else
                 {
                     trig = trigs[0];
                     trig.TriggerDialogue();
                     talkOnce = true;
+                }
+
+                if (cat == true)
+                {
+                    trig = trigs[4];
+                    trig.TriggerDialogue();
+                    goback = true;
+                    Debug.Log("cat");
                 }
             }
         }

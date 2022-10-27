@@ -37,7 +37,7 @@ public class DoorKey : MonoBehaviour
 
     IEnumerator Ending()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(3f);
         sc.SceneChange();
     }
     private void OnTriggerEnter2D(Collider2D collision)
