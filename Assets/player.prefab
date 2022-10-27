@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveMult: 200
+  climbMult: 0
   castDist: 0.55
   takeoffTime: 0.1
   jumpLimit: 9
@@ -64,6 +65,7 @@ GameObject:
   - component: {fileID: 4353557816482367073}
   - component: {fileID: 6081684312787121982}
   - component: {fileID: 2569483070180800270}
+  - component: {fileID: 2011713502299296623}
   m_Layer: 2
   m_Name: player
   m_TagString: player
@@ -209,3 +211,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   notice: {fileID: 0}
+--- !u!114 &2011713502299296623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8804544517939633388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7942d6ecb38afff48b7f936c75311b4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

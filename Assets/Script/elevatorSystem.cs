@@ -8,9 +8,10 @@ public class elevatorSystem : MonoBehaviour
 
     bool enterE = false;
     public Animator anim;
+    GameObject player;
     private void Start()
     {
-
+        player = GameObject.FindGameObjectWithTag("player");
     }
 
     private void Update()
@@ -26,13 +27,20 @@ public class elevatorSystem : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D col)
     {
-        enterE = true;
+        if (col.gameObject.tag == "player")
+        {
+            enterE = true;
+        }
+
 
     }
 
     private void OnTriggerExit2D(Collider2D col)
     {
-        enterE=false;
+        if (col.gameObject.tag == "player")
+        {
+            enterE = false;
+        }
     }
 
 

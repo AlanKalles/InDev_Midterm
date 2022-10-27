@@ -10,6 +10,8 @@ TagManager:
   - interactive
   - npc
   - missitem
+  - cat
+  - ladder
   layers:
   - Default
   - TransparentFX

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class oldManEvent : MonoBehaviour
@@ -10,9 +11,15 @@ public class oldManEvent : MonoBehaviour
     bool item = false;
     bool afterItem = false;
     bool talkOnce = false;
+    bool cat = false;
+    GameObject player;
+    bool goback = false;
+    public BellSystem bellSystem;
+    public SceneChanger changer;
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("player");
 
     }
 
@@ -33,11 +40,18 @@ public class oldManEvent : MonoBehaviour
                     trig = trigs[1];
                     trig.TriggerDialogue();
                     afterItem = true;
+                    bellSystem.enableBell();
                 }
                 else if (item == true && afterItem == true)
                 {
                     trig = trigs[2];
                     trig.TriggerDialogue();
+                }
+                else if (cat == true)
+                {
+                    trig = trigs[4];
+                    trig.TriggerDialogue();
+                    goback = true;
                 }
                 else
                 {
@@ -46,6 +60,19 @@ public class oldManEvent : MonoBehaviour
                     talkOnce = true;
                 }
             }
+        }
+        if (this.transform.position.x - player.transform.position.x > 0)
+        {
+            this.transform.localScale = new Vector3(1, 1, 1)
+;        }
+        else if (this.transform.position.x - player.transform.position.x < 0)
+        {
+            this.transform.localScale = new Vector3(-1, 1, 1);
+        }
+
+        if (goback == true && Input.GetKeyDown(KeyCode.T))
+        {
+            changer.SceneChange();
         }
     }
 
@@ -62,5 +89,10 @@ public class oldManEvent : MonoBehaviour
     public void cattoyCheck()
     {
         item = true;
+    }
+
+    public void catCheck()
+    {
+        cat = true;
     }
 }

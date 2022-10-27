@@ -1,16 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
     public float moveMult;
+    public float climbMult;
     float horiMove;
     float vertMove;
 
     bool grounded = false;
     bool jumping = false;
     bool jump = false;
+    bool climb = false;
+    bool canClimb = false;
+    int callClimb = 0;
+    bool climbJump = false;
+    bool canClimbJump = false;
     public float castDist = 0.55f;
 
     public float takeoffTime = 0.1f;
@@ -35,16 +42,29 @@ public class CharacterMovement : MonoBehaviour
     {
         horiMove = Input.GetAxis("Horizontal");
         vertMove = Input.GetAxis("Vertical");
-        if (Input.GetKeyDown("space") && grounded)
+        if (Input.GetKeyDown("space") && (grounded || canClimbJump))
         {
+            myBody.velocity = new Vector3(myBody.velocity.x,0) ;
             myAnim.SetTrigger("takeoff");
             StartCoroutine(jumpDelay(takeoffTime));
+            climbJump = true;
+            canClimbJump = false;
         }
     }
 
     private void FixedUpdate()
     {
         horizontalMove(horiMove);
+        if (canClimb && vertMove != 0)
+        {
+            climb = true;
+        }
+
+        if (climb)
+        {
+            climbMove(vertMove);
+            canClimbJump = true;
+        }
 
         if (jump)
         {
@@ -75,6 +95,7 @@ public class CharacterMovement : MonoBehaviour
         if (hit.collider != null && hit.collider.tag == "ground")
         {
             grounded = true;
+            canClimbJump = false;
             Debug.DrawRay(myPlayer.transform.position, Vector2.down * castDist, new Color(0, 255, 0));
         }
         else
@@ -98,7 +119,7 @@ public class CharacterMovement : MonoBehaviour
         float moveX = toMove * Time.fixedDeltaTime * moveMult;
         myBody.velocity = new Vector3(moveX, myBody.velocity.y);
         
-        if (myBody.velocity.x > 0 || myBody.velocity.x < 0)
+        if (myBody.velocity.x > 0 || myBody.velocity.x < 0 && canClimbJump == false)
         {
             myAnim.SetBool("isRun", true);
             if (myBody.velocity.x > 0)
@@ -115,4 +136,55 @@ public class CharacterMovement : MonoBehaviour
             myAnim.SetBool("isRun", false);
         }
     }
+
+    void climbMove(float toClimb)
+    {
+        float moveY = toClimb * Time.fixedDeltaTime * climbMult;
+        if (climbJump == false )
+        {
+            myBody.velocity = new Vector3(myBody.velocity.x, moveY);
+            myBody.gravityScale = 0;
+        }
+
+
+        if (callClimb == 0)
+        {
+            myAnim.SetBool("isClimb", true);
+            myAnim.SetTrigger("callClimb");
+            callClimb = 1;
+        }
+        
+        if (moveY != 0)
+        {
+            myAnim.SetBool("isClimbing", true);
+        }
+        else
+        {
+            myAnim.SetBool("isClimbing", false);
+        }
+
+    }
+
+    public void climbDetector(bool b)
+    {
+        if (b)
+        {
+            canClimb = true;
+            climbJump = false;
+
+        }
+        else if (b == false)
+        {
+            canClimb = false;
+            climb = false;
+            myAnim.SetBool("isClimbing", false);
+            myAnim.SetBool("isClimb", false);
+            callClimb = 0;
+            myBody.gravityScale = gravityFall;
+            climbJump = false;
+        }
+
+    }
+
+
 }

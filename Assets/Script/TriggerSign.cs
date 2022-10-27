@@ -6,6 +6,8 @@ using UnityEngine.Events;
 public class TriggerSign : MonoBehaviour
 {
     public NoticeSign notice;
+    bool yesSign = false;
+    int which;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,28 +17,39 @@ public class TriggerSign : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (yesSign)
+        {
+            notice.signPop(which);
+        }
+        else
+        {
+            notice.signDown();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
+        
         if (col.gameObject.tag == "interactive")
         {
-            notice.signPop(0);
+            yesSign = true;
+            which = 0;
         }
-        if (col.gameObject.tag == "npc")
+        if (col.gameObject.tag == "npc" || col.gameObject.tag == "cat")
         {
-            notice.signPop(2);
+            yesSign = true;
+            which = 2;
         }
         if (col.gameObject.tag == "missitem")
         {
-            notice.signPop(1);
+            yesSign = true;
+            which = 1;
         }
 
     }
 
     private void OnTriggerExit2D(Collider2D col)
     {
-        notice.signDown();
+        yesSign = false;
     }
 }
